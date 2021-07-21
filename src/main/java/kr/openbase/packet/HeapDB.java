@@ -22,6 +22,7 @@ public class HeapDB {
 
     public void updateData(String host, Integer status) {
 	SendRequest sendRequest = reqMap.get(host);
+	sendRequest.setTotalReq(sendRequest.getTotalReq()+1);
 	int s = status / 100;
 	switch (s) {
 	case 2:

@@ -10,11 +10,14 @@ public class SendRequest {
     private String host;
     private HttpMethod method = HttpMethod.GET;
     private List<Integer> hourlyCnt = new ArrayList<>();
+    private int errPer; //percent
+    private int totalReq;
     private int x2xx;
     private int x3xx;
     private int x4xx;
     private int x5xx;
     private int xfail;
+    private boolean run;
 
     public int getIndex() {
 	return index;
@@ -87,5 +90,30 @@ public class SendRequest {
     public void setMethod(HttpMethod method) {
 	this.method = method;
     }
+
+    public int getErrPer() {
+        return errPer;
+    }
+
+    public void setErrPer(int errPer) {
+        this.errPer = errPer;
+    }
+
+    public int getTotalReq() {
+        return totalReq;
+    }
+
+    public void setTotalReq(int totalReq) {
+        this.totalReq = totalReq;
+    }
+
+    public boolean isRun() {
+        return run;
+    }
+
+    public void setRun(boolean run) {
+        this.run = run;
+    }
+    
 
 }
