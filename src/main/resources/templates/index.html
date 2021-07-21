@@ -84,9 +84,9 @@
                     <th>Index</th>
                     <th>Host</th>
                     <th>Method</th>
-                    <th>Houly Req/Min Count</th>
+                    <th>Hourly Req/Min Count</th>
                     <th>Error Percent</th>
-                    <th>total Request</th>
+                    <th>Total Request</th>
                     <th>2XX</th>
                     <th>3XX</th>
                     <th>4XX</th>
@@ -236,13 +236,13 @@
                         tdHost.innerText = response.data[i].host;
                         tdMethod.innerText = response.data[i].method;
                         tdCnt.innerText = response.data[i].hourlyCnt;
-                        tdTotalReq.innerText = response.data[i].totalReq;
+                        tdTotalReq.innerText = response.data[i].xMap.total;
                         tdErrorPerc.innerText = response.data[i].errPer;
-                        td2xx.innerText = response.data[i].x2xx;
-                        td3xx.innerText = response.data[i].x3xx;
-                        td4xx.innerText = response.data[i].x4xx;
-                        td5xx.innerText = response.data[i].x5xx;
-                        tdFail.innerText = response.data[i].xfail;
+                        td2xx.innerText = response.data[i].xMap.x2xx;
+                        td3xx.innerText = response.data[i].xMap.x3xx;
+                        td4xx.innerText = response.data[i].xMap.x4xx;
+                        td5xx.innerText = response.data[i].xMap.x5xx;
+                        tdFail.innerText = response.data[i].xMap.fail;
                         tdDelBtn.innerText = "";
                         var delBtn = document.createElement("button");
                         delBtn.innerText = "Delete";

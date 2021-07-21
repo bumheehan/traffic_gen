@@ -1,4 +1,4 @@
-package kr.openbase.packet;
+package kr.openbase.traffic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class PacketApplication {
+public class TrafficApplication {
 
     public static void main(String[] args) {
-	SpringApplication.run(PacketApplication.class, args);
+	SpringApplication.run(TrafficApplication.class, args);
     }
 
 }

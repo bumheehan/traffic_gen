@@ -1,4 +1,4 @@
-package kr.openbase.packet;
+package kr.openbase.traffic;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

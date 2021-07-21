@@ -1,4 +1,4 @@
-package kr.openbase.packet;
+package kr.openbase.traffic;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
