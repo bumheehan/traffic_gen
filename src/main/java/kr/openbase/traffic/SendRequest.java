@@ -14,6 +14,7 @@ public class SendRequest implements Comparable<SendRequest> {
   private int errPer; //percent
   private boolean run;
   private Map<String, Integer> xMap = new ConcurrentHashMap<>();
+  private double[] coeff;
 
   public int getIndex() {
     return index;
@@ -70,6 +71,15 @@ public class SendRequest implements Comparable<SendRequest> {
 
   public void setxMap(Map<String, Integer> xMap) {
     this.xMap = xMap;
+  }
+
+
+  public double[] getCoeff() {
+    return coeff;
+  }
+
+  public void setCoeff(double[] coeff) {
+    this.coeff = coeff;
   }
 
   @Override

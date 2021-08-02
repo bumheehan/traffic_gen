@@ -19,41 +19,41 @@ import org.thymeleaf.templateresolver.ITemplateResolver;
 @Configuration
 public class WebConfig implements ApplicationContextAware, WebFluxConfigurer {
 
-    ApplicationContext context;
+  ApplicationContext context;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-	this.context = context;
-    }
+  @Override
+  public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+    this.context = applicationContext;
+  }
 
-    @Bean
-    public ITemplateResolver thymeleafTemplateResolver() {
-	final SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
-	resolver.setApplicationContext(this.context);
-	resolver.setPrefix("classpath:templates/");
-	resolver.setSuffix(".html");
-	resolver.setTemplateMode(TemplateMode.HTML);
-	resolver.setCacheable(false);
-	resolver.setCheckExistence(false);
-	return resolver;
-    }
+  @Bean
+  public ITemplateResolver thymeleafTemplateResolver() {
+    final SpringResourceTemplateResolver resolver = new SpringResourceTemplateResolver();
+    resolver.setApplicationContext(this.context);
+    resolver.setPrefix("classpath:templates/");
+    resolver.setSuffix(".html");
+    resolver.setTemplateMode(TemplateMode.HTML);
+    resolver.setCacheable(false);
+    resolver.setCheckExistence(false);
+    return resolver;
+  }
 
-    @Bean
-    public ISpringWebFluxTemplateEngine thymeleafTemplateEngine() {
-	SpringWebFluxTemplateEngine templateEngine = new SpringWebFluxTemplateEngine();
-	templateEngine.setTemplateResolver(thymeleafTemplateResolver());
-	return templateEngine;
-    }
+  @Bean
+  public ISpringWebFluxTemplateEngine thymeleafTemplateEngine() {
+    SpringWebFluxTemplateEngine templateEngine = new SpringWebFluxTemplateEngine();
+    templateEngine.setTemplateResolver(thymeleafTemplateResolver());
+    return templateEngine;
+  }
 
-    @Bean
-    public ThymeleafReactiveViewResolver thymeleafReactiveViewResolver() {
-	ThymeleafReactiveViewResolver viewResolver = new ThymeleafReactiveViewResolver();
-	viewResolver.setTemplateEngine(thymeleafTemplateEngine());
-	return viewResolver;
-    }
+  @Bean
+  public ThymeleafReactiveViewResolver thymeleafReactiveViewResolver() {
+    ThymeleafReactiveViewResolver viewResolver = new ThymeleafReactiveViewResolver();
+    viewResolver.setTemplateEngine(thymeleafTemplateEngine());
+    return viewResolver;
+  }
 
-    @Override
-    public void configureViewResolvers(ViewResolverRegistry registry) {
-	registry.viewResolver(thymeleafReactiveViewResolver());
-    }
+  @Override
+  public void configureViewResolvers(ViewResolverRegistry registry) {
+    registry.viewResolver(thymeleafReactiveViewResolver());
+  }
 }

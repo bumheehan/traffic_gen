@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import org.apache.commons.math3.fitting.PolynomialCurveFitter;
+import org.apache.commons.math3.fitting.WeightedObservedPoints;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -73,6 +75,27 @@ public class HeapDB {
     xMap.put("x4xx", 0);
     xMap.put("x5xx", 0);
 
+    List<Integer> data = req.getHourlyCnt();
+
+    WeightedObservedPoints obs = new WeightedObservedPoints();
+    int addEndPointCnt = 3;
+    int x = 1;
+    for (int y : data) {
+      if (x == 24) {
+        obs.add(0, y);
+      } else {
+        obs.add(60 * x++, y);
+      }
+    }
+    for (int i = 1; i <= addEndPointCnt; i++) {
+      obs.add(60 * (i * -1), data.get(data.size() - i));
+      obs.add(60 * x++, data.get(i - 1));
+    }
+    PolynomialCurveFitter fitter = PolynomialCurveFitter.create(3);
+
+    double[] coeff = fitter.fit(obs.toList());
+    req.setCoeff(coeff);
+
     reqMap.put(req.getHost(), req);
     reqIdxMap.put(req.getIndex(), req.getHost());
 
@@ -92,7 +115,6 @@ public class HeapDB {
   public void deleteReq(int idx) {
     String host = reqIdxMap.get(idx);
     log.info("req 삭제 , Host : {}", host);
-
     reqMap.remove(host);
     reqIdxMap.remove(idx);
   }

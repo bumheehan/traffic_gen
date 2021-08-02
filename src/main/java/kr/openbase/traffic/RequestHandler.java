@@ -59,11 +59,24 @@ public class RequestHandler {
     }
   }
 
+  private int cal(double[] coeff) {
+    Integer cnt = LocalTime.now().getMinute() + LocalTime.now().getHour() * 60;
+    int retVal = (int) (Math.pow(cnt, 3) * coeff[3] + Math.pow(cnt, 2) * coeff[2]
+        + Math.pow(cnt, 1) * coeff[1] + coeff[0]);
+    if (retVal < 0) {
+      return 0;
+    } else {
+      return retVal;
+    }
+  }
+
   public void send(SendRequest request) {
 
     String host = request.getHost();
     URI uri = UriComponentsBuilder.fromHttpUrl(host).build().toUri();
-    Integer cnt = request.getHourlyCnt().get(LocalTime.now().getHour());
+
+    int cnt = cal(request.getCoeff());
+
     int randCnt = request.getErrPer() / 100 * cnt;
     if (Math.random() > 0.5) {
       cnt += randCnt;
